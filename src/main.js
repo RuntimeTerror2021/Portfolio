@@ -135,7 +135,9 @@ function initializeHeroEffects() {
         'Cybersecurity Enthusiast',
         'System Administrator',
         'Problem Solver',
-        'Tech Content Creator'
+        'Content Creator',
+        'Gamer',
+        'Fast Learner'
     ];
 
     let phraseIndex = 0;
