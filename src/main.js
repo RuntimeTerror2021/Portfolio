@@ -1,8 +1,4 @@
 /*
-==============================================
-ALEX CHEN PORTFOLIO WEBSITE JAVASCRIPT
-==============================================
-Self-taught developer & cybersecurity enthusiast
 
 TABLE OF CONTENTS:
 1. DOM Content Loaded Event
@@ -18,6 +14,8 @@ TABLE OF CONTENTS:
 ==============================================
 */
 
+//TODO: email form
+
 // =========== 1. DOM Content Loaded Event ===========
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality when DOM is ready
@@ -30,8 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeScrollAnimations();
     initializeBackToTop();
     initializeAccessibility();
-
-    console.log('Alex Chen Portfolio website initialized successfully');
 });
 
 // =========== 2. Navigation & Mobile Menu ===========
@@ -137,7 +133,10 @@ function initializeHeroEffects() {
         'Problem Solver',
         'Content Creator',
         'Gamer',
-        'Fast Learner'
+        'Fast Learner',
+        'Tech Lover',
+        'Programmer',
+        'Game Designer'
     ];
 
     let phraseIndex = 0;
@@ -382,6 +381,8 @@ function handleFormSubmission(e) {
     submitButton.disabled = true;
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
+    //TODO: use firebase storage here??
+
     // Simulate form submission (replace with actual endpoint)
     setTimeout(() => {
         // Success simulation
@@ -397,33 +398,6 @@ function handleFormSubmission(e) {
 
     }, 2000);
 
-    /*
-    // Real form submission example:
-    fetch('/submit-contact', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showNotification('Thank you for your message!', 'success');
-            form.reset();
-        } else {
-            showNotification('There was an error sending your message. Please try again.', 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showNotification('There was an error sending your message. Please try again.', 'error');
-    })
-    .finally(() => {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalText;
-    });
-    */
 }
 
 // =========== 7. Smooth Scrolling ===========

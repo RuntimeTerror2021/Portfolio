@@ -433,7 +433,8 @@ section {
 
 .title-cursor {
     color: var(--accent-emerald);
-    animation: blink 1s infinite;
+    animation: blink 1.2s infinite;
+    margin-left: -8px;
 }
 
 .hero-subtitle {
@@ -577,7 +578,7 @@ section {
 }
 
 .prompt {
-    color: var(--accent-emerald);
+    color: var(--accent-emerald-light);
 }
 
 .command {
@@ -994,6 +995,10 @@ section {
 .project-link:hover {
     background-color: var(--accent-emerald-light);
     transform: scale(1.1);
+}
+
+.project-link:visited {
+    color: white;
 }
 
 .project-content {
