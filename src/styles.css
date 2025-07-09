@@ -528,6 +528,10 @@ section {
     width: 100%;
 }
 
+.terminal-window * {
+    text-align: left;
+}
+
 .terminal-header {
     background-color: var(--primary-light);
     padding: var(--spacing-md);

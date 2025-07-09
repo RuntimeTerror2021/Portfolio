@@ -355,11 +355,11 @@ function getFieldLabel(fieldName) {
 }
 
 function handleFormSubmission(e) {
-    e.preventDefault();
+    // e.preventDefault();
 
     const form = e.target;
-    const formData = new FormData(form);
     const submitButton = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
 
     // Validate all fields
     const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
@@ -726,17 +726,5 @@ window.addEventListener('error', function(e) {
     showNotification('An unexpected error occurred. Please refresh the page.', 'error');
 });
 
-// Service Worker registration for PWA capabilities (optional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
-            .then(function(registration) {
-                console.log('ServiceWorker registration successful');
-            })
-            .catch(function(err) {
-                console.log('ServiceWorker registration failed');
-            });
-    });
-}
 
-console.log('Alex Chen Portfolio website loaded successfully');
+

@@ -54,9 +54,10 @@
             <li class="nav-item">
                 <a href="#projects" class="nav-link">Projects</a>
             </li>
-            <li class="nav-item">
-                <a href="#testimonials" class="nav-link">Testimonials</a>
-            </li>
+<!--            TODO: add testims -->
+<!--            <li class="nav-item">-->
+<!--                <a href="#testimonials" class="nav-link">Testimonials</a>-->
+<!--            </li>-->
             <li class="nav-item">
                 <a href="#contact" class="nav-link">Contact</a>
             </li>
@@ -125,10 +126,10 @@
                     </div>
 
                     <div class="social-links">
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                        <a href="https://github.com/RuntimeTerror2021" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                             <i class="fab fa-github" aria-hidden="true"></i>
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                        <a href="https://linkedin.com/in/aasoni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                             <i class="fab fa-linkedin" aria-hidden="true"></i>
                         </a>
                         <a href="https://youtube.com/@howtfdoes_work" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
@@ -1069,7 +1070,11 @@
                 </div>
 
                 <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
+                    <form action="https://api.web3forms.com/submit" class="contact-form" id="contactForm" method="POST">
+
+                        <input type="hidden" name="apikey" value="b7acc05f-4597-4ad6-8584-b6a40c21b23d">
+<!--                        <input type="hidden" name="access_key" value="b7acc05f-4597-4ad6-8584-b6a40c21b23d">-->
+
                         <h3>Send a Message</h3>
 
                         <div class="form-row">
@@ -1092,8 +1097,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="subject">Subject *</label>
-                            <select id="subject" name="subject" required>
+                            <label for="inqSubject">Subject *</label>
+                            <select id="inqSubject" name="inqSubject" required>
                                 <option value="">Select a subject</option>
                                 <option id="web-development" value="web-development">Web Development Project</option>
                                 <option id="cybersecurity" value="cybersecurity">Cybersecurity Consultation</option>
@@ -1103,7 +1108,7 @@
                                 <option id="kali" value="kali">Kali Linux Rig</option>
                                 <option id="other" value="other">Other</option>
                             </select>
-                            <span class="error-message" id="subject-error"></span>
+                            <span class="error-message" id="inqSubject-error"></span>
                         </div>
 
                         <div class="form-group">
@@ -1111,6 +1116,10 @@
                             <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project or how I can help..."></textarea>
                             <span class="error-message" id="message-error"></span>
                         </div>
+
+                        <input type="hidden" name="subject" value="New Submission from Portfolio Site">
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <button type="submit" class="cta-btn primary large">
                             <i class="fas fa-paper-plane" aria-hidden="true"></i>
@@ -1163,7 +1172,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
+<!--                    <li><a href="#testimonials">Testimonials</a></li>-->
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
