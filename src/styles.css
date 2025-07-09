@@ -1273,8 +1273,13 @@ section {
 }
 
 .status-indicator.available {
-    background-color: var(--accent-emerald);
+    background-color: rgb(53, 156, 0);
     animation: pulse 2s infinite;
+}
+
+.status-indicator.unavailable {
+    background-color: rgb(119, 0, 0);
+    /*animation: pulse 2s infinite;*/
 }
 
 .availability-status span {
