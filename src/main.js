@@ -14,8 +14,6 @@ TABLE OF CONTENTS:
 ==============================================
 */
 
-//TODO: email form
-
 // =========== 1. DOM Content Loaded Event ===========
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality when DOM is ready
