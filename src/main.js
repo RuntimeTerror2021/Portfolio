@@ -652,11 +652,11 @@ function debounce(func, wait) {
 }
 
 // Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(function() {
-    // Any expensive scroll operations can go here
-}, 16); // ~60fps
+// const debouncedScrollHandler = debounce(function() {
+//     // Any expensive scroll operations can go here
+// }, 16); // ~60fps
 
-window.addEventListener('scroll', debouncedScrollHandler);
+// window.addEventListener('scroll', debouncedScrollHandler);
 
 // Error handling for images
 document.addEventListener('error', function(e) {
@@ -707,22 +707,38 @@ document.addEventListener('keydown', function(e) {
         // Show keyboard shortcuts modal
     }
 });
-
-// Performance monitoring
-window.addEventListener('load', function() {
-    // Log performance metrics
-    if (window.performance && window.performance.timing) {
-        const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-        console.log(`Page load time: ${loadTime}ms`);
-        trackEvent('Performance', 'page_load', loadTime);
-    }
-});
+//
+// // Performance monitoring
+// window.addEventListener('load', function() {
+//     // Log performance metrics
+//     if (window.performance && window.performance.timing) {
+//         const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+//         console.log(`Page load time: ${loadTime}ms`);
+//         trackEvent('Performance', 'page_load', loadTime);
+//     }
+// });
 
 // Error handling
 window.addEventListener('error', function(e) {
     console.error('JavaScript error:', e.error);
     showNotification('An unexpected error occurred. Please refresh the page.', 'error');
 });
+
+
+//services links handling
+const serviceLinks = document.querySelectorAll("footer .footer-section.services li a")
+const subjDrop = document.getElementById('subject')
+
+
+
+serviceLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        subjDrop.value = this.getAttribute('data-target');
+    })
+})
+
+
+
 
 
 

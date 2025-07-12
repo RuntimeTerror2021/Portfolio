@@ -610,7 +610,7 @@
                                 <a href="https://ingredient-insight.web.app/" target="_blank" class="project-link" aria-label="View live demo">
                                     <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                                 </a>
-                                <a href="#" class="project-link" aria-label="View source code">
+                                <a href="https://github.com/RuntimeTerror2021/ingredient-insight" target="_blank" class="project-link" aria-label="View source code">
                                     <i class="fab fa-github" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -704,7 +704,7 @@
                         <img src="media/pfp.png?height=300&width=500&text=How+Tf+YouTube" alt="How Tf YouTube Channel">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://www.youtube.com/@howtfdoes_work" class="project-link" aria-label="Visit YouTube channel">
+                                <a href="https://www.youtube.com/@howtfdoes_work" target="_blank" class="project-link" aria-label="Visit YouTube channel">
                                     <i class="fab fa-youtube" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -740,7 +740,7 @@
                         <img src="media/DesignoLogo.png?height=300&width=500&text=Web+Design+Business" alt="Web Design Portfolio">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View portfolio">
+                                <a href="https://designo-b50ea.web.app/" target="_blank" class="project-link" aria-label="View portfolio">
                                     <i class="fas fa-globe" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -798,7 +798,7 @@
                         <img src="media/scripts.jpeg?height=300&width=500&text=Custom+Scripts" alt="Custom Development Tools">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View scripts repository">
+                                <a href="https://github.com/RuntimeTerror2021/MafiaRoleGen" target="_blank" class="project-link" aria-label="View scripts repository">
                                     <i class="fab fa-github" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -1097,18 +1097,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inqSubject">Subject *</label>
-                            <select id="inqSubject" name="inqSubject" required>
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
                                 <option value="">Select a subject</option>
                                 <option id="web-development" value="web-development">Web Development Project</option>
                                 <option id="cybersecurity" value="cybersecurity">Cybersecurity Consultation</option>
+                                <option id="sysconfig" value="sysconfig">System Configuration</option>
                                 <option id="collaboration" value="collaboration">Collaboration Opportunity</option>
                                 <option id="internship" value="internship">Internship/Mentorship</option>
                                 <option id="macbook" value="macbook">Multi-OS MacBook Rig</option>
                                 <option id="kali" value="kali">Kali Linux Rig</option>
+                                <option value="scripts" id="scripts">Custom Scripts</option>
                                 <option id="other" value="other">Other</option>
                             </select>
-                            <span class="error-message" id="inqSubject-error"></span>
+                            <span class="error-message" id="subject-error"></span>
                         </div>
 
                         <div class="form-group">
@@ -1176,14 +1178,14 @@
                 </ul>
             </div>
 
-            <div class="footer-section">
+            <div class="footer-section services">
                 <h4>Services</h4>
                 <ul class="footer-links">
-                    <li><a href="#contact">Web Development</a></li>
-                    <li><a href="#contact">Cybersecurity Consulting</a></li>
-                    <li><a href="#contact">System Configuration</a></li>
-                    <li><a href="#contact">Custom Scripts</a></li>
-                    <li><a href="#contact">Technical Content</a></li>
+                    <li><a data-target="web-development" href="#contact">Web Development</a></li>
+                    <li><a data-target="cybersecurity" href="#contact">Cybersecurity Consulting</a></li>
+                    <li><a data-target="sysconfig" href="#contact">System Configuration</a></li>
+                    <li><a data-target="scripts" href="#contact">Custom Scripts</a></li>
+                    <li><a data-target="internship" href="#contact">Internship/Mentorship</a></li>
                 </ul>
             </div>
 
