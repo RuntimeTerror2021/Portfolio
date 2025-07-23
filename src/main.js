@@ -14,6 +14,12 @@ TABLE OF CONTENTS:
 ==============================================
 */
 
+import { app as firebase, analytics } from './firebase-config.js';
+import { logEvent } from 'firebase/analytics';
+
+
+
+
 // =========== 1. DOM Content Loaded Event ===========
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality when DOM is ready
@@ -667,46 +673,33 @@ document.addEventListener('error', function(e) {
 }, true);
 
 // Analytics tracking (replace with your analytics code)
-function trackEvent(category, action, label) {
-    // Google Analytics 4 example:
-    // gtag('event', action, {
-    //     event_category: category,
-    //     event_label: label
-    // });
+function trackEvent(type, action, category, label) {
+
+    logEvent(type, action, {
+        event_category: category,
+        event_label: label
+    });
 
     console.log(`Analytics: ${category} - ${action} - ${label}`);
 }
 
 // Track important user interactions
 document.addEventListener('click', function(e) {
+    const evType = 'user_interaction'
     const target = e.target.closest('button, a');
     if (target) {
         if (target.classList.contains('cta-btn')) {
-            trackEvent('CTA', 'click', target.textContent.trim());
+            trackEvent(evType, 'click', 'CTA', target.textContent.trim());
         } else if (target.classList.contains('project-link')) {
-            trackEvent('Project', 'view', target.closest('.project-card').querySelector('h3').textContent);
+            trackEvent(evType, 'click', 'Project', target.closest('.project-card').querySelector('h3').textContent);
         } else if (target.href && target.href.startsWith('mailto:')) {
-            trackEvent('Contact', 'email_click', target.href);
+            trackEvent(evType, 'email_click', 'Contact', target.href);
         } else if (target.href && target.href.includes('github.com')) {
-            trackEvent('Social', 'github_click', target.href);
+            trackEvent(evType, 'github_click', 'Social', target.href);
         }
     }
 });
 
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Ctrl/Cmd + K to focus search (if implemented)
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        // Focus search input if available
-    }
-
-    // Ctrl/Cmd + / to show keyboard shortcuts (if implemented)
-    if ((e.ctrlKey || e.metaKey) && e.key === '/') {
-        e.preventDefault();
-        // Show keyboard shortcuts modal
-    }
-});
 //
 // // Performance monitoring
 // window.addEventListener('load', function() {
