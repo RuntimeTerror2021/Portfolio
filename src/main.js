@@ -359,7 +359,7 @@ function getFieldLabel(fieldName) {
 }
 
 function handleFormSubmission(e) {
-    // e.preventDefault();
+    e.preventDefault();
 
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
@@ -386,6 +386,20 @@ function handleFormSubmission(e) {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
     //TODO: use firebase storage here??
+
+    //submit form via email temporarily
+    const subject = "New Submission from Portfolio"
+    var fname = document.getElementById('firstName').value,
+        lname = document.getElementById('lastName').value,
+        email = document.getElementById('email').value,
+        inquiryTopic = document.getElementById('subject').value,
+        message = document.getElementById('message').value;
+
+    const body =
+        `Hi Aaryan,%0D%0AI am writing to ask you about ${inquiryTopic}.%0D%0AHere's my message:%0D%0A${message} 
+        %0D%0A–${fname} ${lname} [${email}]`
+
+    location.href = `mailto:aasoni.dev@gmail.com?subject=${subject}&body=${body}`;
 
     // Simulate form submission (replace with actual endpoint)
     setTimeout(() => {
@@ -712,10 +726,10 @@ document.addEventListener('click', function(e) {
 // });
 
 // Error handling
-window.addEventListener('error', function(e) {
-    console.error('JavaScript error:', e.error);
-    showNotification('An unexpected error occurred. Please refresh the page.', 'error');
-});
+// window.addEventListener('error', function(e) {
+//     console.error('JavaScript error:', e.error);
+//     showNotification('An unexpected error occurred. Please refresh the page.', 'error');
+// });
 
 
 //services links handling
