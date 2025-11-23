@@ -234,9 +234,9 @@ function createCodeRain() {
         drop.style.color = '#002c55';
         drop.style.fontSize = '14px';
         drop.style.fontFamily = 'monospace';
-        drop.style.opacity = '0.1';
+        drop.style.opacity = '0.12';
         drop.style.animation = `fall ${Math.random() * 5 + 3}s linear infinite`;
-        drop.style.animationDelay = Math.random() * 2 + 's';
+        // drop.style.animationDelay = Math.random() * 2 + 's';
 
         // Create falling text
         let text = '';
@@ -244,6 +244,7 @@ function createCodeRain() {
             text += characters[Math.floor(Math.random() * characters.length)] + '<br>';
         }
         drop.innerHTML = text;
+
 
         codeRain.appendChild(drop);
     }
