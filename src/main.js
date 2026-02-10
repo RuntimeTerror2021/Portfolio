@@ -443,6 +443,14 @@ function initializeSmoothScrolling() {
 // =========== 8. Intersection Observer for Animations ===========
 function initializeScrollAnimations() {
     // Elements to animate on scroll
+
+    document.querySelectorAll('*[class^=\'delay\'], *[class*=\' delay\']').forEach((element) => {
+        var elClassStr = element.classList.toString();
+        var delayScalar = parseInt(elClassStr.substring(elClassStr.indexOf("delay") + 6))
+
+        element.style.animationDelay = delayScalar * 0.1 + "s";
+    })
+
     const animateElements = document.querySelectorAll(
         '.section-header, .about-content, .skill-category, .project-card, ' +
         '.testimonial-card, .contact-content, .capability-list li'
