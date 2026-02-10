@@ -199,7 +199,7 @@ img {
 section {
     padding: var(--spacing-4xl) 0;
     scroll-snap-align: start;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 50px;
 }
 
 .section-header {
@@ -1070,6 +1070,7 @@ section {
     -webkit-transition: all var(--transition-normal);
     transition: all var(--transition-normal);
     position: relative;
+    scroll-snap-align: start;
 }
 
 .project-card:hover {
@@ -1237,6 +1238,8 @@ section {
     border-radius: var(--radius-xl);
     -webkit-box-shadow: var(--shadow-md);
     box-shadow: var(--shadow-md);
+    scroll-snap-align: start;
+    scroll-margin-top: 50px;
 }
 
 .projects-cta p {
