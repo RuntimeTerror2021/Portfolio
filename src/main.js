@@ -359,12 +359,20 @@ function getFieldLabel(fieldName) {
     return labels[fieldName] || fieldName;
 }
 
-function handleFormSubmission(e) {
+async function handleFormSubmission(e) {
     e.preventDefault();
 
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
+    formData.append("access_key", "b7acc05f-4597-4ad6-8584-b6a40c21b23d");
+
+    const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
+
+    if (!hCaptcha) {
+        showNotification("Please fill out captcha field before submitting form", "warning");
+        return
+    }
 
     // Validate all fields
     const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
@@ -388,24 +396,48 @@ function handleFormSubmission(e) {
 
     //TODO: use firebase storage here??
 
-    //submit form via email temporarily
-    const subject = "New Submission from Portfolio"
-    var fname = document.getElementById('firstName').value,
-        lname = document.getElementById('lastName').value,
-        email = document.getElementById('email').value,
-        inquiryTopic = document.getElementById('subject').value,
-        message = document.getElementById('message').value;
+    // //submit form via email temporarily
+    // const subject = "New Submission from Portfolio"
+    // var fname = document.getElementById('firstName').value,
+    //     lname = document.getElementById('lastName').value,
+    //     email = document.getElementById('email').value,
+    //     inquiryTopic = document.getElementById('subject').value,
+    //     message = document.getElementById('message').value;
 
-    const body =
-        `Hi Aaryan,%0D%0AI am writing to ask you about ${inquiryTopic}.%0D%0AHere's my message:%0D%0A${message} 
-        %0D%0A–${fname} ${lname} [${email}]`
+    let completionMessage = '';
+    let completionType = ''
 
-    location.href = `mailto:aasoni.dev@gmail.com?subject=${subject}&body=${body}`;
+    // const body =
+    //     `Hi Aaryan,%0D%0AI am writing to ask you about ${inquiryTopic}.%0D%0AHere's my message:%0D%0A${message}
+    //     %0D%0A–${fname} ${lname} [${email}]`
+    //
+    // location.href = `mailto:aasoni.dev@gmail.com?subject=${subject}&body=${body}`;
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            completionMessage = 'Thank you for your message! I\'ll get back to you within 24 hours.';
+            completionType = 'success';
+        } else {
+            completionMessage = ("Error: " + data.message);
+            completionType = 'error';
+        }
+
+    } catch (error) {
+        completionMessage = ("Something went wrong. Please try again. - " + error);
+        completionType = 'error';
+    }
 
     // Simulate form submission (replace with actual endpoint)
     setTimeout(() => {
         // Success simulation
-        showNotification('Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
+        showNotification(completionMessage, completionType);
         form.reset();
 
         // Reset button
@@ -550,6 +582,7 @@ function showNotification(message, type = 'info') {
             .notification-success { border-left-color: #10b981; }
             .notification-error { border-left-color: #ef4444; }
             .notification-info { border-left-color: #3b82f6; }
+            .notification-warning { border-left-color: #FE996C; }
             .notification-content {
                 display: flex;
                 align-items: center;
