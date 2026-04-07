@@ -1066,6 +1066,8 @@ section {
     transition: all var(--transition-normal);
     position: relative;
     scroll-snap-align: start;
+    display: grid;
+    grid-template-rows: 250px 1fr;
 }
 
 .project-card:hover {
@@ -1093,7 +1095,7 @@ section {
 
 .project-image img {
     width: 100%;
-    height: 100%;
+    height: 250px;
     object-fit: cover;
     -webkit-transition: -webkit-transform var(--transition-slow);
     transition: -webkit-transform var(--transition-slow);
@@ -1108,7 +1110,7 @@ section {
 .project-overlay {
     position: absolute;
     top: 0;
-    left: 0;
+    /*left: 0;*/
     width: 100%;
     height: 100%;
     background: linear-gradient(
@@ -1171,11 +1173,17 @@ section {
 }
 
 .project-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /*grid-template-rows: 1fr 2fr 0.5fr 50px;*/
+    /*height: 100%;*/
     padding: var(--spacing-xl);
+    position: relative;
+    padding-bottom: var(--spacing-4xl);
 }
 
 .project-badge {
-    display: inline-block;
     padding: var(--spacing-xs) var(--spacing-sm);
     background-color: var(--accent);
     color: var(--white);
@@ -1184,24 +1192,35 @@ section {
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: var(--spacing-md);
+    width: fit-content;
+    height: fit-content;
+    margin: 2rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 .project-content h3 {
     margin-bottom: var(--spacing-md);
     color: var(--primary-color);
+    flex: 1;
+
 }
 
 .project-content p {
-    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+    /*margin-bottom: var(--spacing-2xl);*/
     color: var(--gray-600);
 }
 
 .project-tech {
     display: -webkit-box;
     display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
+    /*margin-bottom: var(--spacing-lg);*/
 }
 
 .tech-tag {
@@ -1211,6 +1230,7 @@ section {
     border-radius: var(--radius-md);
     font-size: 0.75rem;
     font-weight: 500;
+    height: fit-content;
 }
 
 .project-status {
@@ -1224,6 +1244,10 @@ section {
     color: var(--accent);
     font-size: 0.875rem;
     font-weight: 500;
+    margin: 2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .projects-cta {
