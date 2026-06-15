@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.3.1"
+    "vite": "^8.0.16"
+  },
+  "dependencies": {
+    "rollup": "^4.62.0"
   }
 }

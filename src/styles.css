@@ -27,11 +27,11 @@ TABLE OF CONTENTS:
 /* =========== 1. CSS Variables & Reset =========== */
 :root {
 
-    --primary-color: #002549;
-    --primary-light: #002c55;
-    --primary-dark: #001b35;
-    --accent: #1A5288;
-    --accent-light: rgba(33, 106, 175, 0.98);
+    --primary-color: #5ba4ec;
+    --primary-light: #ADD2F6;
+    --primary-dark: #4782bc;
+    --accent: #376A9E;
+    --accent-light: #4A85BF;
     --accent-dark: #11365a;
 
     --white: #ffffff;
@@ -45,7 +45,7 @@ TABLE OF CONTENTS:
     --gray-600: #4b5563;
     --gray-700: #374151;
     --gray-800: #1f2937;
-    --gray-900: #111827;
+    --gray-900: #121720;
 
     /* Typography */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -109,8 +109,10 @@ html {
 body {
     font-family: var(--font-primary);
     line-height: 1.6;
-    color: var(--gray-800);
-    background-color: var(--white);
+    /*color: var(--gray-800);*/
+    /*background-color: var(--white);*/
+    color: var(--white);
+    background-color: var(--gray-900);
     overflow-x: hidden;
 }
 
@@ -200,6 +202,8 @@ section {
     padding: var(--spacing-4xl) 0;
     scroll-snap-align: start;
     scroll-margin-top: 50px;
+    color: var(--white) !important;
+    background-color: var(--gray-900) !important;
 }
 
 .section-header {
@@ -212,7 +216,7 @@ section {
 
 .section-subtitle {
     font-size: 1.125rem;
-    color: var(--gray-500);
+    color: var(--gray-300);
     margin-top: var(--spacing-md);
 }
 
@@ -245,7 +249,7 @@ section {
 }
 
 .cta-btn.primary:hover, .cta-btn.primary:focus {
-    background-color: var(--accent-dark);
+    background-color: oklch(from var(--accent-dark) 0.7 c h / 1);
     -webkit-transform: translateY(-2px);
     -ms-transform: translateY(-2px);
     transform: translateY(-2px);
@@ -275,17 +279,19 @@ section {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
+    /*background-color: rgba(255, 255, 255, 0.95);*/
+    background: oklch(from var(--gray-900) l c h / 0.95);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-600);
     z-index: var(--z-fixed);
     -webkit-transition: all var(--transition-normal);
     transition: all var(--transition-normal);
 }
 
 .navbar.scrolled {
-    background-color: rgba(255, 255, 255, 0.98);
+    /*background-color: rgba(255, 255, 255, 0.98);*/
+    background: oklch(from var(--gray-900) l c h / 0.98);
     -webkit-box-shadow: var(--shadow-md);
     box-shadow: var(--shadow-md);
 }
@@ -331,7 +337,7 @@ section {
 
 .nav-link {
     font-weight: 500;
-    color: var(--gray-700);
+    color: var(--gray-300);
     padding: var(--spacing-sm) 0;
     position: relative;
     -webkit-transition: color var(--transition-fast);
@@ -417,7 +423,7 @@ section {
     align-items: center;
     overflow: hidden;
     padding-top: 80px;
-    background: linear-gradient(135deg, var(--white) 0%, var(--primary-color) 100%);
+    background: linear-gradient(135deg, var(--gray-900) 30%, var(--primary-color) 100%);
 
 }
 
@@ -442,6 +448,10 @@ section {
     overflow: hidden;
 }
 
+.code-rain div {
+    color: var(--gray-900)
+}
+
 .hero-content {
     display: grid;
     -ms-grid-columns: 1fr var(--spacing-3xl) 1fr;
@@ -461,7 +471,7 @@ section {
 .hero-greeting {
     display: block;
     font-size: 1.125rem;
-    color: var(--accent);
+    color: var(--primary-light);
     margin-bottom: var(--spacing-sm);
     font-weight: 500;
 }
@@ -473,7 +483,7 @@ section {
 }
 
 .title-cursor {
-    color: var(--accent);
+    color: var(--primary-light);
     -webkit-animation: blink 1.2s infinite;
     animation: blink 1.2s infinite;
     margin-left: -8px;
@@ -488,12 +498,12 @@ section {
 }
 
 .typing-text {
-    color: var(--accent);
+    color: var(--primary-light);
 }
 
 .hero-description {
     font-size: 1.125rem;
-    color: var(--gray-600);
+    color: var(--gray-400);
     margin-bottom: var(--spacing-2xl);
     max-width: 600px;
 }
@@ -578,7 +588,7 @@ section {
 }
 
 .terminal-window {
-    background-color: var(--primary-color);
+    background-color: var(--gray-900);
     border-radius: var(--radius-xl);
     -webkit-box-shadow: var(--shadow-xl);
     box-shadow: var(--shadow-xl);
@@ -592,7 +602,7 @@ section {
 }
 
 .terminal-header {
-    background-color: var(--primary-light);
+    background-color: var(--gray-800);
     padding: var(--spacing-md);
     display: -webkit-box;
     display: flex;
@@ -605,7 +615,7 @@ section {
 .terminal-buttons {
     display: -webkit-box;
     display: flex;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-sm);
 }
 
 .terminal-buttons span {
@@ -680,7 +690,7 @@ section {
 }
 
 .about-story h3 {
-    color: var(--accent);
+    color: var(--primary-light);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -688,10 +698,11 @@ section {
     font-size: 1.125rem;
     line-height: 1.7;
     margin-bottom: var(--spacing-lg);
+    color: var(--gray-400);
 }
 
 .capabilities h3 {
-    color: var(--accent);
+    color: var(--primary-light);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -709,7 +720,8 @@ section {
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--white);
+    /*background-color: var(--white);*/
+    background-color: var(--gray-800);
     border-radius: var(--radius-lg);
     -webkit-box-shadow: var(--shadow-sm);
     box-shadow: var(--shadow-sm);
@@ -726,7 +738,7 @@ section {
 }
 
 .capability-list i {
-    color: var(--accent);
+    color: var(--primary-light);
     font-size: 1.25rem;
     margin-top: var(--spacing-xs);
     flex-shrink: 0;
@@ -742,7 +754,8 @@ section {
 }
 
 .setup-showcase {
-    background-color: var(--white);
+    /*background-color: var(--white);*/
+    background-color: var(--gray-800);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
     -webkit-box-shadow: var(--shadow-lg);
@@ -770,7 +783,8 @@ section {
 }
 
 .setup-item:hover {
-    background-color: var(--gray-50);
+    /*background-color: var(--gray-50);*/
+    background-color: var(--gray-700);
 }
 
 .setup-icon {
@@ -864,7 +878,7 @@ section {
 }
 
 .skill-category {
-    background-color: var(--gray-50);
+    background-color: var(--gray-800);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
     -webkit-box-shadow: var(--shadow-md);
@@ -924,11 +938,11 @@ section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
 }
 
 .skill-item {
-    background-color: var(--white);
+    background-color: var(--primary-light);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-lg);
     -webkit-box-shadow: var(--shadow-sm);
@@ -950,7 +964,7 @@ section {
 
 .skill-name {
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--accent-dark);
 }
 
 .skill-level {
@@ -990,7 +1004,7 @@ section {
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
-    background-color: var(--white);
+    background-color: var(--primary-light);
     border-radius: var(--radius-lg);
     -webkit-box-shadow: var(--shadow-sm);
     box-shadow: var(--shadow-sm);
@@ -1013,7 +1027,7 @@ section {
 
 .tool-item span, .os-item span {
     font-weight: 500;
-    color: var(--primary-color);
+    color: var(--accent-dark);
 }
 
 .creative-tools, .dev-tools {
@@ -1025,11 +1039,11 @@ section {
 
 .tool-badge {
     padding: var(--spacing-sm) var(--spacing-md);
-    background-color: var(--white);
-    color: var(--primary-color);
+    background-color: var(--primary-light);
+    color: var(--accent-dark);
     border-radius: var(--radius-lg);
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     -webkit-box-shadow: var(--shadow-sm);
     box-shadow: var(--shadow-sm);
     -webkit-transition: all var(--transition-normal);
@@ -1057,7 +1071,8 @@ section {
 }
 
 .project-card {
-    background-color: var(--white);
+    /*background-color: var(--white);*/
+    background-color: var(--gray-800);
     border-radius: var(--radius-xl);
     overflow: hidden;
     -webkit-box-shadow: var(--shadow-md);
@@ -1099,6 +1114,10 @@ section {
     object-fit: cover;
     -webkit-transition: -webkit-transform var(--transition-slow);
     transition: -webkit-transform var(--transition-slow);
+}
+
+.project-image img.octane-img {
+    object-fit: contain;
 }
 
 .project-card:hover .project-image img {
@@ -1202,7 +1221,7 @@ section {
 
 .project-content h3 {
     margin-bottom: var(--spacing-md);
-    color: var(--primary-color);
+    color: var(--primary-light);
     flex: 1;
 
 }
@@ -1210,7 +1229,7 @@ section {
 .project-content p {
     flex-grow: 1;
     /*margin-bottom: var(--spacing-2xl);*/
-    color: var(--gray-600);
+    color: var(--gray-400);
 }
 
 .project-tech {
@@ -1225,8 +1244,8 @@ section {
 
 .tech-tag {
     padding: var(--spacing-xs) var(--spacing-sm);
-    background-color: var(--gray-100);
-    color: var(--gray-700);
+    background-color: var(--gray-700);
+    color: var(--gray-100);
     border-radius: var(--radius-md);
     font-size: 0.75rem;
     font-weight: 500;
@@ -1253,7 +1272,7 @@ section {
 .projects-cta {
     text-align: center;
     padding: var(--spacing-2xl);
-    background-color: var(--white);
+    background-color: var(--gray-800);
     border-radius: var(--radius-xl);
     -webkit-box-shadow: var(--shadow-md);
     box-shadow: var(--shadow-md);
@@ -1264,7 +1283,7 @@ section {
 .projects-cta p {
     font-size: 1.25rem;
     margin-bottom: var(--spacing-lg);
-    color: var(--gray-700);
+    color: var(--gray-200);
 }
 
 /* =========== 9. Testimonials Section =========== */
@@ -1408,6 +1427,7 @@ section {
     font-size: 1.125rem;
     line-height: 1.7;
     margin-bottom: var(--spacing-2xl);
+    color: var(--gray-300);
 }
 
 .contact-methods {
@@ -1423,7 +1443,7 @@ section {
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     padding: var(--spacing-lg);
-    background-color: var(--white);
+    background-color: var(--primary-light);
     border-radius: var(--radius-lg);
     -webkit-box-shadow: var(--shadow-sm);
     box-shadow: var(--shadow-sm);
@@ -1459,7 +1479,7 @@ section {
 
 .contact-details h4 {
     margin-bottom: var(--spacing-sm);
-    color: var(--primary-color);
+    color: var(--accent-dark);
 }
 
 .contact-details a {
@@ -1627,7 +1647,7 @@ section {
 
 /* =========== 11. Footer =========== */
 .footer {
-    background-color: var(--primary-color);
+    background-color: var(--gray-800);
     color: var(--gray-300);
     padding: var(--spacing-3xl) 0 var(--spacing-xl);
     scroll-snap-align: start;
@@ -1642,7 +1662,7 @@ section {
 }
 
 .footer-section h4 {
-    color: var(--white);
+    color: var(--accent-light);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -1663,11 +1683,11 @@ section {
 .footer-tagline {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--white);
+    color: var(--accent-light);
 }
 
 .footer-description {
-    color: var(--gray-400);
+    color: var(--gray-300);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -1680,7 +1700,7 @@ section {
 .footer-social a {
     width: 40px;
     height: 40px;
-    background-color: var(--primary-light);
+    background-color: var(--accent-light);
     color: var(--gray-300);
     border-radius: var(--radius-md);
     display: -webkit-box;
@@ -1733,7 +1753,7 @@ section {
 }
 
 .footer-contact i {
-    color: var(--accent);
+    color: var(--accent-light);
     width: 20px;
 }
 
@@ -1752,6 +1772,10 @@ section {
     gap: var(--spacing-md);
 }
 
+.footer-bottom p {
+    color: var(--gray-50);
+}
+
 
 
 .footer-bottom-links {
@@ -1761,7 +1785,7 @@ section {
 }
 
 .footer-bottom-links a {
-    color: var(--gray-400);
+    color: var(--primary-light);
     font-size: 0.875rem;
 }
 

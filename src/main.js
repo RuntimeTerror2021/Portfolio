@@ -367,9 +367,9 @@ async function handleFormSubmission(e) {
     const formData = new FormData(form);
     formData.append("access_key", "b7acc05f-4597-4ad6-8584-b6a40c21b23d");
 
-    const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
+    const hCaptcha = form.querySelector('textarea[name=h-captcha-response]');
 
-    if (!hCaptcha) {
+    if (/*!hCaptcha || */(hCaptcha && !hCaptcha.value)) {
         showNotification("Please fill out captcha field before submitting form", "warning");
         return
     }
