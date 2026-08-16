@@ -4,6 +4,7 @@ TABLE OF CONTENTS:
 1. DOM Content Loaded Event
 2. Navigation & Mobile Menu
 3. Scroll Effects & Animations
+3.5 Projects Sticky Scroller
 4. Hero Section Effects
 5. Skills Animation
 6. Form Handling & Validation
@@ -16,6 +17,7 @@ TABLE OF CONTENTS:
 
 import { app as firebase, analytics } from './firebase-config.js';
 import { logEvent } from 'firebase/analytics';
+import { animate, inView, scroll, stagger } from 'motion';
 
 
 
@@ -23,9 +25,14 @@ import { logEvent } from 'firebase/analytics';
 // =========== 1. DOM Content Loaded Event ===========
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality when DOM is ready
+    if (window.location.hostname === "aaryan-soni.web.app" || window.location.hostname === "aaryan-soni.firebaseapp.com") {
+        window.location.href = "https://aasoni.dev" + window.location.pathname + window.location.search;
+    }
+
     initializeNavigation();
     initializeScrollEffects();
     initializeHeroEffects();
+    initializeProjectsScroller();
     initializeSkillsAnimation();
     initializeFormHandling();
     initializeSmoothScrolling();
@@ -38,38 +45,59 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeNavigation() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const navClose = document.getElementById('navClose');
+    const navOverlay = document.getElementById('navOverlay');
     const navLinks = document.querySelectorAll('.nav-link');
     const navbar = document.getElementById('navbar');
+
+    function closeMenu() {
+        if (!hamburger || !navMenu) return;
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+        if (!hamburger || !navMenu) return;
+        hamburger.classList.add('active');
+        navMenu.classList.add('active');
+        if (navOverlay) navOverlay.classList.add('active');
+        document.body.classList.add('no-scroll');
+        hamburger.setAttribute('aria-expanded', 'true');
+        if (navClose) navClose.focus();
+    }
 
     // Mobile menu toggle functionality
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.classList.toggle('no-scroll');
-
-            // Update ARIA attributes for accessibility
-            const isExpanded = hamburger.classList.contains('active');
-            hamburger.setAttribute('aria-expanded', isExpanded);
+            if (hamburger.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
-        // Close mobile menu when clicking on nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-                hamburger.setAttribute('aria-expanded', 'false');
-            });
+        // Close mobile menu when clicking any link inside the drawer
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
+
+        // Close mobile menu via the drawer's close button
+        if (navClose) {
+            navClose.addEventListener('click', closeMenu);
+        }
+
+        // Close mobile menu when clicking the scrim backdrop
+        if (navOverlay) {
+            navOverlay.addEventListener('click', closeMenu);
+        }
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-                hamburger.setAttribute('aria-expanded', 'false');
+                closeMenu();
             }
         });
     }
@@ -106,17 +134,17 @@ function initializeScrollEffects() {
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Add scrolled class to navbar for styling
-        if (scrollTop > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+        // // Add scrolled class to navbar for styling
+        // if (scrollTop > 50) {
+        //     navbar.classList.add('scrolled');
+        // } else {
+        //     navbar.classList.remove('scrolled');
+        // }
 
         // Hide/show navbar on scroll (optional enhancement)
-        if (scrollTop > lastScrollTop && scrollTop > 200) {
+        if (scrollTop > lastScrollTop && scrollTop > 250) {
             // Scrolling down
-            navbar.style.transform = 'translateY(-100%)';
+            navbar.style.transform = 'translateY(-200%)';
         } else {
             // Scrolling up
             navbar.style.transform = 'translateY(0)';
@@ -124,6 +152,224 @@ function initializeScrollEffects() {
 
         lastScrollTop = scrollTop;
     });
+}
+
+// =========== 3.5 Projects Sticky Scroller ===========
+function initializeProjectsScroller() {
+    const scroller = document.querySelector('[data-projects-scroller]');
+    const sticky = document.querySelector('[data-projects-sticky]');
+    const track = document.querySelector('[data-projects-track]');
+    const prevBtn = document.querySelector('[data-projects-prev]');
+    const nextBtn = document.querySelector('[data-projects-next]');
+
+    if (!scroller || !sticky || !track || !prevBtn || !nextBtn) return;
+
+    // Respect reduced motion: CSS falls back to a wrapping vertical layout
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduceMotion.matches) return;
+
+    const cards = Array.from(track.children);
+    const count = cards.length;
+    if (count === 0) return;
+
+    let currentIndex = 0;
+    let maxTrackX = 0;
+    let cardOffsets = [];
+    let stickyTop = 0;
+    let scrollDistance = 0;
+    let trackAnim = null;
+    let scrollEndTimer = null;
+
+    function measure() {
+        const rail = sticky.querySelector('.projects-scroller');
+        const scrollerRect = rail.getBoundingClientRect();
+        const stickyRect = sticky.getBoundingClientRect();
+        // Visible track window: from the track's start (container edge)
+        // to the sticky viewport's right clip edge.
+        const windowWidth = stickyRect.right - scrollerRect.left;
+        // Center of the viewport relative to the track's start.
+        const viewportCenter = (stickyRect.left + stickyRect.right) / 2 - scrollerRect.left;
+        // Extra scroll padding so the last card's center can reach the
+        // viewport center instead of stopping at the right clip edge.
+        const lastCard = cards[count - 1];
+        const lastCardCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
+        const centeredMax = Math.max(0, lastCardCenter - viewportCenter);
+        maxTrackX = Math.max(track.scrollWidth - windowWidth, centeredMax);
+        // Evenly distribute snap positions across the full scroll range so
+        // every card is reachable and the last card can be centered.
+        cardOffsets = cards.map((_, index) => (
+            count > 1 ? (maxTrackX * index) / (count - 1) : 0
+        ));
+        // Anchor of the sticky's scroll range. Measured from the non-sticky
+        // wrapper so it is correct regardless of the current scroll position:
+        // sticky.getBoundingClientRect().top clamps to 0 while pinned, which
+        // would otherwise corrupt the anchor when re-measured mid-scroll.
+        stickyTop = scroller.getBoundingClientRect().top + window.scrollY;
+        scrollDistance = Math.max(0, scroller.offsetHeight - window.innerHeight);
+    }
+
+    // Read the track's current rendered offset straight from the applied
+    // transform, regardless of which animation set it.
+    function currentTrackX() {
+        const match = track.style.transform.match(/translate(?:3d|X)\(\s*(-?[\d.]+)px/);
+        return match ? parseFloat(match[1]) : 0;
+    }
+
+    function applyX(x) {
+        const clamped = Math.min(0, Math.max(-maxTrackX, x));
+        track.style.transform = `translate3d(${clamped}px, 0, 0)`;
+    }
+
+    function nearestIndex(x) {
+        const abs = Math.abs(x);
+        let best = 0;
+        let bestDist = Infinity;
+        cardOffsets.forEach((offset, index) => {
+            const dist = Math.abs(abs - offset);
+            if (dist < bestDist) {
+                bestDist = dist;
+                best = index;
+            }
+        });
+        return best;
+    }
+
+    function updateArrows() {
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === count - 1;
+    }
+
+    function updateActive() {
+        cards.forEach((card, index) => card.classList.toggle('is-active', index === currentIndex));
+    }
+
+    function goToIndex(index, syncScroll = false) {
+        index = Math.min(Math.max(0, index), count - 1);
+        currentIndex = index;
+        updateArrows();
+        updateActive();
+
+        const targetX = -cardOffsets[index];
+
+        // Animate the track only: the sticky viewport never scrolls away and
+        // the cards slide at a controlled pace.
+        if (trackAnim) trackAnim.stop();
+        trackAnim = animate(track, { x: targetX }, {
+            duration: 0.45,
+            ease: 'easeOut',
+            onComplete: () => {
+                trackAnim = null;
+                // For explicit arrow/keyboard navigation, keep the page scroll
+                // in sync with the animated card so the wheel position and the
+                // track never diverge. While pinned the sticky fills the
+                // viewport, so this jump is invisible; it is also clamped to
+                // the section's scroll range so it can never overshoot. Use
+                // 'instant' — the site's CSS scroll-behavior:smooth would
+                // otherwise animate the page.
+                if (syncScroll && maxTrackX > 0) {
+                    const progress = cardOffsets[index] / maxTrackX;
+                    const target = stickyTop + progress * scrollDistance;
+                    window.scrollTo({
+                        top: Math.min(stickyTop + scrollDistance, Math.max(stickyTop, target)),
+                        behavior: 'instant'
+                    });
+                }
+            }
+        });
+    }
+
+    prevBtn.addEventListener('click', () => goToIndex(currentIndex - 1, true));
+    nextBtn.addEventListener('click', () => goToIndex(currentIndex + 1, true));
+
+    // Keyboard navigation while the sticky section is in view
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const rect = sticky.getBoundingClientRect();
+        if (rect.top >= window.innerHeight || rect.bottom <= 0) return;
+        e.preventDefault();
+        goToIndex(currentIndex + (e.key === 'ArrowRight' ? 1 : -1), true);
+    });
+
+    measure();
+
+    // Drive the horizontal track from vertical scroll progress
+    let lastScrollProgress = null;
+    scroll((progress) => {
+        // Ignore redundant scroll updates (e.g. trailing events dispatched with
+        // no actual movement) that would otherwise fight arrow navigation.
+        if (lastScrollProgress !== null && Math.abs(progress - lastScrollProgress) < 0.001) return;
+        lastScrollProgress = progress;
+
+        if (trackAnim) trackAnim.stop();
+        const scrollX = -progress * maxTrackX;
+
+        // If an arrow animation left the track far from the scroll-driven
+        // position, glide it back instead of snapping so wheel scrolling
+        // resumes smoothly.
+        if (Math.abs(scrollX - currentTrackX()) > 8) {
+            trackAnim = animate(track, { x: scrollX }, {
+                duration: 0.35,
+                ease: 'easeOut',
+                onComplete: () => { trackAnim = null; }
+            });
+        } else {
+            applyX(scrollX);
+        }
+
+        // Live-highlight whichever card is closest to the snap position
+        const nearest = nearestIndex(scrollX);
+        if (nearest !== currentIndex) {
+            currentIndex = nearest;
+            updateArrows();
+            updateActive();
+        }
+
+        // Snap to the nearest card once scrolling settles
+        clearTimeout(scrollEndTimer);
+        scrollEndTimer = setTimeout(() => {
+            const snapTarget = -cardOffsets[nearestIndex(scrollX)];
+            // if (Math.abs(scrollX - snapTarget) > 2) goToIndex(nearestIndex(scrollX));
+        }, 150);
+    }, { target: scroller, offset: ['start start', 'end end'] });
+
+    // Sync to current scroll position on load (e.g. deep links / refresh)
+    const loadProgress = scrollDistance > 0
+        ? Math.min(1, Math.max(0, (window.scrollY - stickyTop) / scrollDistance))
+        : 0;
+    currentIndex = nearestIndex(loadProgress * maxTrackX);
+    updateArrows();
+    updateActive();
+    applyX(-loadProgress * maxTrackX);
+
+    // Staggered card entrance when the section scrolls into view
+    let entranceDone = false;
+    inView(sticky, () => {
+        if (entranceDone) return;
+        entranceDone = true;
+        animate(cards, { opacity: [0, 1], y: [40, 0] }, {
+            duration: 0.6,
+            ease: 'easeOut',
+            delay: stagger(0.08),
+            // Clear inline styles so CSS hover/active transforms take over
+            onComplete: () => cards.forEach(card => {
+                card.style.opacity = '';
+                card.style.transform = '';
+            })
+        });
+    }, { amount: 0.3 });
+
+    // Re-measure and re-snap on resize
+    window.addEventListener('resize', debounce(() => {
+        measure();
+        goToIndex(currentIndex);
+    }, 150));
+
+    // Layout may shift after fonts/images above the section finish loading;
+    // refresh geometry without disturbing the current card or scroll position.
+    window.addEventListener('load', () => {
+        measure();
+        goToIndex(currentIndex);
+    }, { once: true });
 }
 
 // =========== 4. Hero Section Effects ===========
@@ -231,7 +477,7 @@ function createCodeRain() {
         const drop = document.createElement('div');
         drop.style.position = 'absolute';
         drop.style.left = i * 20 + 'px';
-        drop.style.color = '#002c55';
+        drop.style.color = 'var(--primary-light)';
         drop.style.fontSize = '14px';
         drop.style.fontFamily = 'monospace';
         drop.style.opacity = '0.12';
@@ -484,7 +730,7 @@ function initializeScrollAnimations() {
     })
 
     const animateElements = document.querySelectorAll(
-        '.section-header, .about-content, .skill-category, .project-card, ' +
+        '.section-header, .about-content, .skill-category, ' +
         '.testimonial-card, .contact-content, .capability-list li'
     );
 
@@ -501,8 +747,7 @@ function initializeScrollAnimations() {
                 entry.target.classList.add('scroll-animate', 'in-view');
 
                 // Add staggered animation for grid items
-                if (entry.target.parentElement.classList.contains('projects-grid') ||
-                    entry.target.parentElement.classList.contains('testimonials-grid') ||
+                if (entry.target.parentElement.classList.contains('testimonials-grid') ||
                     entry.target.parentElement.classList.contains('skills-grid')) {
 
                     const siblings = Array.from(entry.target.parentElement.children);
@@ -690,11 +935,14 @@ function initializeAccessibility() {
         if (e.key === 'Escape') {
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.querySelector('.nav-menu');
+            const navOverlay = document.getElementById('navOverlay');
             if (hamburger && navMenu && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                if (navOverlay) navOverlay.classList.remove('active');
                 document.body.classList.remove('no-scroll');
                 hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.focus();
             }
         }
     });

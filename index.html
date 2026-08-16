@@ -19,12 +19,13 @@
     <meta name="google-site-verification" content="iTDkkwh5dljRrud-quB5frQUdYHbe7mHwcHmfLhq5M4" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
-
+<!--    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">-->
+    <link rel="shortcut icon" href="media/logo.png" type="image/x-icon">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,37 +39,63 @@
 
 <!-- Navigation -->
 <nav class="navbar" id="navbar">
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
     <div class="nav-container">
         <a href="#home" class="nav-logo">
-            <span class="logo-text">AS</span>
+            <img src="media/logo%20bgr.png" alt="AS logo">
         </a>
 
-        <ul class="nav-menu" id="navMenu">
-            <li class="nav-item">
-                <a href="#home" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="#about" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-                <a href="#projects" class="nav-link">Projects</a>
-            </li>
-            <li class="nav-item">
-                <a href="#skills" class="nav-link">Skills</a>
-            </li>
+        <div class="nav-menu" id="navMenu">
+            <div class="nav-drawer-header">
+                <a href="#home" class="nav-drawer-brand">
+                    <img src="media/logo%20bgr.png" alt="AS logo">
+                    <span>Aaryan Soni</span>
+                </a>
+                <button class="nav-close" id="navClose" aria-label="Close menu" aria-controls="navMenu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
 
-<!--            TODO: add testims -->
-<!--            <li class="nav-item">-->
-<!--                <a href="#testimonials" class="nav-link">Testimonials</a>-->
-<!--            </li>-->
-            <li class="nav-item">
-                <a href="#contact" class="nav-link">Contact</a>
-            </li>
-        </ul>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="nav-drawer-footer">
+                <a href="#contact" class="cta-btn primary nav-drawer-cta">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    Get In Touch
+                </a>
+                <div class="nav-drawer-social">
+                    <a href="https://github.com/RuntimeTerror2021" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/aasoni/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="mailto:aasoni.dev@gmail.com" aria-label="Email Contact">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <div class="nav-actions">
             <a href="#contact" class="cta-btn primary">Get In Touch</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -99,7 +126,7 @@
                     </div>
                     <p class="hero-description animate-fade-in-up delay-2">
                         A self-taught developer with curiosity for how technology works beneath the surface.
-                        I spend my time learning cybersecurity, frontend development, graphic design, and app development.
+                        I spend my time learning cybersecurity, web development, graphic design, and app development.
                     </p>
 
                     <div class="hero-stats">
@@ -128,15 +155,15 @@
                         </a>
                     </div>
 
-                    <div class="social-links animate-fade-in-up delay-9">
+                    <div class="social-links delay-9">
                         <a href="https://github.com/RuntimeTerror2021" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                             <i class="fab fa-github" aria-hidden="true"></i>
                         </a>
 <!--                        <a href="https://linkedin.com/in/aasoni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">-->
 <!--                            <i class="fab fa-linkedin" aria-hidden="true"></i>-->
 <!--                        </a>-->
-                        <a href="https://youtube.com/@howtfdoes_work" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
-                            <i class="fab fa-youtube" aria-hidden="true"></i>
+                        <a href="https://www.linkedin.com/in/aasoni/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
                         </a>
                         <a href="mailto:aasoni.dev@gmail.com" aria-label="Email Contact">
                             <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -145,7 +172,7 @@
                 </div>
 
                 <div class="hero-visual animate-fade-in-up delay-10">
-                    <div class="terminal-window">
+                    <div class="terminal-window ">
                         <div class="terminal-header">
                             <div class="terminal-buttons">
                                 <span class="btn-close"></span>
@@ -159,7 +186,7 @@
                                 <span class="prompt">aaryansoni@macbook:~$</span>
                                 <span class="command">whoami</span>
                             </div>
-                            <div class="terminal-line output animate-fade-in-up delay-12">Frontend Developer, Gamer & Pen Testing Enthusiast</div>
+                            <div class="terminal-line output animate-fade-in-up delay-12">Developer, Gamer & Pen Testing Enthusiast</div>
                             <div class="terminal-line animate-fade-in-up delay-13">
                                 <span class="prompt">aaryansoni@macbook:~$</span>
                                 <span class="command">ls ./skills</span>
@@ -175,6 +202,10 @@
                                 <span class="cursor-blink">_</span>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="pfp-container">
+                        <img src="media/pfp.jpeg" alt="Aaryan Soni Profile Picture" />
                     </div>
                 </div>
             </div>
@@ -193,18 +224,18 @@
                     <div class="about-story">
                         <h3>My Journey</h3>
                         <p>
-                            I'm a self-taught, highly motivated high school student with an intense curiosity for how technology
-                            works beneath the surface. From when I was 10, I've been building a hands-on foundation in computer forensics, networking, system
-                            configuration, programming, brand design, and problem-solving.
+                            I'm a self-taught and self-motivated student with an intense curiosity for how technology
+                            works beneath the surface. From age 10, I've been building a foundation in computer forensics, networking, system
+                            configuration, programming, brand design, problem-solving, and critical thinking.
                         </p>
                         <p>
-                            I treat my computer like a lab by breaking, fixing, and customizing the devices I use daily.
-                            I've developed real skills not from classes, but from figuring things out when everything should've broken.
+                            I treat my computer like a lab by breaking, fixing, and customizing the devices and software I use daily.
+                            I've developed useful real-world skills not from classes, but from figuring things out on my own.
                         </p>
                         <p>
-                            My approach is simple: <strong>Break it. Fix it. Learn from it.</strong> This philosophy has led me to start
-                            mastering multiple operating systems, configuring complex development environments, and working towards creating applications that
-                            actually work in real use cases.
+                            My approach is straightforward: <strong>Break it. Fix it. Learn from it.</strong> This philosophy has led me to start
+                            mastering multiple operating systems, configuring complex development environments, and creating workflow scripts and applications that
+                            actually help in real use cases.
                         </p>
                     </div>
 
@@ -212,32 +243,24 @@
                         <h3>What I'm Capable Of</h3>
                         <ul class="capability-list">
                             <li>
+                                <i class="fas fa-code" aria-hidden="true"></i>
+                                Writing and debugging code in HTML5, CSS3, JS/TS, Java, Python3, Swift, and more
+                            </li>
+                            <li>
+                                <i class="fas fa-tools" aria-hidden="true"></i>
+                                Building complex but useful apps, sites, and utility scripts from scratch
+                            </li>
+                            <li>
                                 <i class="fas fa-bug" aria-hidden="true"></i>
                                 Debugging complex system issues across macOS, Linux, and Windows
                             </li>
                             <li>
-                                <i class="fas fa-server" aria-hidden="true"></i>
-                                Configuring multi-environment dev and pen-testing setups
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                Performing basic penetration testing workflows with Burp and Kali
                             </li>
                             <li>
                                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                                Performing penetration testing workflows using Kali Linux
-                            </li>
-                            <li>
-                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                                Utilizing OSINT methods to reverse engineer and gather forensics information
-                            </li>
-                            <li>
-                                <i class="fas fa-code" aria-hidden="true"></i>
-                                Writing and debugging code in HTML/CSS/JS, Java, Python, Swift, C#, and more
-                            </li>
-                            <li>
-                                <i class="fas fa-tools" aria-hidden="true"></i>
-                                Building projects from scratch
-                            </li>
-                            <li>
-                                <i class="fas fa-video" aria-hidden="true"></i>
-                                Creating educational content for YouTube
+                                Applying OSINT methods to reverse engineer and gather info
                             </li>
                         </ul>
                     </div>
@@ -251,8 +274,8 @@
                                 <i class="fab fa-apple" aria-hidden="true"></i>
                             </div>
                             <div class="setup-info">
-                                <h5>macOS Sequoia 15.5</h5>
-                                <p>Running on outdated 2017 hardware via OCLP root patching</p>
+                                <h5>macOS Sequoia 15.7.9</h5>
+                                <p>Running on outdated 2017 hardware via OpenCore root patch</p>
                             </div>
                         </div>
                         <div class="setup-item">
@@ -260,8 +283,8 @@
                                 <i class="fab fa-linux" aria-hidden="true"></i>
                             </div>
                             <div class="setup-info">
-                                <h5>Kali Linux</h5>
-                                <p>Live USB with persistence for pen-testing</p>
+                                <h5>Kali Linux (GNOME)</h5>
+                                <p>Live USB & VM with persistence for learning pen-testing and OSINT methodology</p>
                             </div>
                         </div>
                         <div class="setup-item">
@@ -269,8 +292,8 @@
                                 <i class="fab fa-windows" aria-hidden="true"></i>
                             </div>
                             <div class="setup-info">
-                                <h5>Windows 11 VM</h5>
-                                <p>VMware Fusion for cross-platform testing and compatibility</p>
+                                <h5>Windows 11 (25H2)</h5>
+                                <p>VM for cross-platform testing and compatibility</p>
                             </div>
                         </div>
                     </div>
@@ -281,9 +304,7 @@
                         </div>
                         <h4>My Philosophy</h4>
                         <blockquote>
-                            "I don't just learn about technology, I live with it. Every bug is a puzzle,
-                            every crash is a learning opportunity, and every successful
-                            fix is a step toward mastery."
+                            I don't simply study technology endlessly, I work and live with it. Bugs are puzzles. Crashes are lessons. Fixes are progress. When something breaks, I want to know why. When I fix it, I know a little more than I did yesterday.
                         </blockquote>
                     </div>
                 </div>
@@ -293,31 +314,38 @@
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2>Featured Projects</h2>
+        <div class="projects-sticky-height" data-projects-scroller>
+            <div class="projects-sticky" data-projects-sticky>
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Featured Projects</h2>
 <!--                <p class="section-subtitle">-->
 <!--                    Real-world solutions built from curiosity and determination-->
 <!--                </p>-->
-            </div>
+                    </div>
 
-            <div class="projects-grid">
+                    <div class="projects-scroller">
+                        <button type="button" class="projects-arrow projects-arrow-prev" data-projects-prev aria-label="Previous project" disabled>
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="projects-track" data-projects-track>
 
                 <!-- Web Design Business -->
                 <div class="project-card featured">
                     <div class="project-image">
-                        <img class="octane-img" src="media/Octane Wordmark.png?height=300&width=300&text=Web+Design+Business" alt="Web Design Portfolio">
+                        <img class="octane-img" src="media/octane_wordmark_tall.png?height=300&width=300&text=Web+Design+Business" alt="Web Design Portfolio">
                         <div class="project-overlay">
                             <div class="project-links">
                                 <a href="https://octane-8e3cb.web.app/" target="_blank" class="project-link" aria-label="View portfolio">
-                                    <i class="fas fa-globe" aria-hidden="true"></i>
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
 
-                        <h3>Octane Studio</h3>
+                        <h3>Octane Web Dev & Design</h3>
                         <p>
                             Designing functional and clean websites for family, friends, and small businesses.
                         </p>
@@ -328,10 +356,10 @@
                             <span class="tech-tag">UX/UI</span>
                             <span class="tech-tag">Freelancing</span>
                         </div>
-                        <div class="project-status">
-                            <i class="fas fa-code" aria-hidden="true"></i>
-                            In Development
-                        </div>
+<!--                        <div class="project-status">-->
+<!--                            <i class="fas fa-code" aria-hidden="true"></i>-->
+<!--                            In Development-->
+<!--                        </div>-->
                         <div class="project-badge">Featured</div>
                     </div>
                 </div>
@@ -372,16 +400,75 @@
                     </div>
                 </div>
 
+                <!-- Word Game -->
+                <div class="project-card featured">
+                                <div class="project-image">
+                                    <img src="media/wordgame.png?height=300&width=500&text=The+Word+Game" alt="The Word Game">
+                                    <div class="project-overlay">
+                                        <div class="project-links">
+                                            <a href="https://wordgame.aasoni.dev/" target="_blank" class="project-link" aria-label="View live demo">
+                                                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="https://github.com/RuntimeTerror2021/wordgame" target="_blank" class="project-link" aria-label="View scripts repository">
+                                                <i class="fab fa-github" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3>The Word Game</h3>
+                                    <p>
+                                        A sleek and simple word-chaining game for utter family boredom.
+                                    </p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">HTML/CSS/JS</span>
+                                        <span class="tech-tag">Responsive Design</span>
+                                        <span class="tech-tag">UX/UI</span>
+                                        <span class="tech-tag">Games</span>
+                                    </div>
+                                    <div class="project-badge">Featured</div>
+                                </div>
+                            </div>
+
+                <!-- Mafia Game -->
+                <div class="project-card featured">
+                    <div class="project-image">
+                        <img src="media/mafia.png?height=300&width=500&text=Mafia+Role+Generator" alt="Mafia Role Generator">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://mafia.aasoni.dev/" target="_blank" class="project-link" aria-label="View live demo">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://github.com/RuntimeTerror2021/MafiaRoleGen" target="_blank" class="project-link" aria-label="View scripts repository">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Mafia Game Role Generator</h3>
+                        <p>
+                            A user-friendly, experience-focused, clean, and functional role randomizer for the popular family game Mafia.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">UX/UI</span>
+                            <span class="tech-tag">Games</span>
+                        </div>
+                        <div class="project-badge">Featured</div>
+                    </div>
+                </div>
 
 
                 <!-- Custom Scripts & Tools -->
-                <div class="project-card featured">
+                <div class="project-card">
                     <div class="project-image">
                         <img src="media/scripts.jpeg?height=300&width=500&text=Custom+Scripts" alt="Custom Development Tools">
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://github.com/RuntimeTerror2021/MafiaRoleGen" target="_blank" class="project-link" aria-label="View scripts repository">
-                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                <a href="#" class="project-link" aria-label="View portfolio">
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -402,70 +489,45 @@
                             <i class="fas fa-code" aria-hidden="true"></i>
                             In Development
                         </div>
-                        <div class="project-badge">Featured</div>
                     </div>
                 </div>
 
-                <!-- Mafia Game -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="media/mafia.png?height=300&width=500&text=Mafia+Role+Generator" alt="Mafia Role Generator">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View portfolio">
-                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Mafia Game Role Generator</h3>
-                        <p>
-                            A user-friendly, experience-focused, clean, and functional role randomizer for the popular family game Mafia.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML/CSS/JS</span>
-                            <span class="tech-tag">Responsive Design</span>
-                            <span class="tech-tag">UX/UI</span>
-                            <span class="tech-tag">Games</span>
-                        </div>
-                    </div>
-                </div>
+
 
                 <!-- YouTube Channel -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="media/pfp.png?height=300&width=500&text=How+Tf+YouTube" alt="How Tf YouTube Channel">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://www.youtube.com/@howtfdoes_work" target="_blank" class="project-link" aria-label="Visit YouTube channel">
-                                    <i class="fab fa-youtube" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>"How Tf?" YouTube Channel</h3>
-                        <p>
-                            Educational short-form videos breaking down complex topics with engaging,
-                            informative content. Features stick-figure mascots.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">DaVinci Resolve</span>
-                            <span class="tech-tag">CapCut</span>
-                            <span class="tech-tag">Procreate</span>
-                            <span class="tech-tag">Figma</span>
-                            <span class="tech-tag">Content Creation</span>
-                            <span class="tech-tag">Education</span>
-                            <span class="tech-tag">Animation</span>
-                        </div>
-                        <div class="project-status">
-                            <i class="fas fa-code" aria-hidden="true"></i>
-                            In Development
-                        </div>
-                    </div>
+<!--                <div class="project-card">-->
+<!--                    <div class="project-image">-->
+<!--                        <img src="media/pfp.png?height=300&width=500&text=How+Tf+YouTube" alt="How Tf YouTube Channel">-->
+<!--                        <div class="project-overlay">-->
+<!--                            <div class="project-links">-->
+<!--                                <a href="https://www.youtube.com/@howtfdoes_work" target="_blank" class="project-link" aria-label="Visit YouTube channel">-->
+<!--                                    <i class="fab fa-youtube" aria-hidden="true"></i>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="project-content">-->
+<!--                        <h3>"How Tf?" YouTube Channel</h3>-->
+<!--                        <p>-->
+<!--                            Educational short-form videos breaking down complex topics with engaging,-->
+<!--                            informative content. Features stick-figure mascots.-->
+<!--                        </p>-->
+<!--                        <div class="project-tech">-->
+<!--                            <span class="tech-tag">DaVinci Resolve</span>-->
+<!--                            <span class="tech-tag">CapCut</span>-->
+<!--                            <span class="tech-tag">Procreate</span>-->
+<!--                            <span class="tech-tag">Figma</span>-->
+<!--                            <span class="tech-tag">Content Creation</span>-->
+<!--                            <span class="tech-tag">Education</span>-->
+<!--                            <span class="tech-tag">Animation</span>-->
+<!--                        </div>-->
+<!--                        <div class="project-status">-->
+<!--                            <i class="fas fa-code" aria-hidden="true"></i>-->
+<!--                            In Development-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                </div>
+<!--                </div>-->
 
                 <!-- Multi-OS MacBook Rig -->
                 <div class="project-card">
@@ -533,8 +595,17 @@
 
 
 
-            </div>
+                        </div>
 
+                        <button type="button" class="projects-arrow projects-arrow-next" data-projects-next aria-label="Next project">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
             <div class="projects-cta">
                 <p>Want to see more of my work?</p>
                 <a href="https://github.com/RuntimeTerror2021" target="_blank" rel="noopener noreferrer" class="cta-btn primary">
@@ -726,16 +797,16 @@
                         </div>
                         <div class="os-item">
                             <i class="fab fa-linux" aria-hidden="true"></i>
-                            <span>Kali Linux <small style="color: grey">(KDE)</small></span>
+                            <span>Kali Linux <small style="color: #9ca3af">(Debian)</small></span>
                         </div>
                         <div class="os-item">
                             <i class="fab fa-windows" aria-hidden="true"></i>
                             <span>Windows</span>
                         </div>
-                        <div class="os-item">
-                            <i class="fas fa-cube" aria-hidden="true"></i>
-                            <span>VMware Fusion</span>
-                        </div>
+<!--                        <div class="os-item">-->
+<!--                            <i class="fas fa-cube" aria-hidden="true"></i>-->
+<!--                            <span>VMware Fusion</span>-->
+<!--                        </div>-->
                     </div>
                 </div>
 
@@ -747,14 +818,12 @@
                     </div>
                     <div class="creative-tools">
                         <div class="tool-badge">DaVinci Resolve</div>
+                        <div class="tool-badge">Affinity</div>
                         <div class="tool-badge">Figma</div>
-                        <div class="tool-badge">Framer</div>
-                        <div class="tool-badge">CapCut</div>
                         <div class="tool-badge">Audacity</div>
-                        <div class="tool-badge">Premiere Rush</div>
-                        <div class="tool-badge">Darktable</div>
-                        <div class="tool-badge">Lightroom Mobile</div>
-                        <div class="tool-badge">Procreate</div>
+                        <div class="tool-badge">RapidRAW</div>
+                        <div class="tool-badge">Blockbench</div>
+                        <div class="tool-badge">TexturePacker</div>
                     </div>
                 </div>
 
@@ -770,11 +839,7 @@
                         <div class="tool-badge">Git</div>
                         <div class="tool-badge">WebStorm</div>
                         <div class="tool-badge">Roblox Studio</div>
-                        <div class="tool-badge">Blockbench</div>
-                        <div class="tool-badge">TexturePacker</div>
                         <div class="tool-badge">Burp Suite</div>
-                        <div class="tool-badge">Figma</div>
-                        <div class="tool-badge">Framer</div>
                     </div>
                 </div>
             </div>
@@ -985,16 +1050,16 @@
                             </div>
                         </div>
 
-<!--                        <div class="contact-method">-->
-<!--                            <div class="contact-icon">-->
-<!--                                <i class="fab fa-linkedin" aria-hidden="true"></i>-->
-<!--                            </div>-->
-<!--                            <div class="contact-details">-->
-<!--                                <h4>LinkedIn</h4>-->
-<!--                                <a href="https://linkedin.com/in/aasoni" target="_blank" rel="noopener noreferrer">Connect with me</a>-->
-<!--                                <p>Professional networking</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/aasoni/" target="_blank" rel="noopener noreferrer">Connect with me</a>
+                                <p>Professional networking</p>
+                            </div>
+                        </div>
 
                         <div class="contact-method">
                             <div class="contact-icon">
@@ -1100,7 +1165,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <span class="logo-text">AS</span>
+                    <img class="logo-text" src="media/logo%20bgr.png" alt="AS logo">
                     <div class="footer-tagline">Aaryan Soni</div>
                 </div>
                 <p class="footer-description">
@@ -1114,8 +1179,8 @@
 <!--                    <a href="https://linkedin.com/in/aasoni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">-->
 <!--                        <i class="fab fa-linkedin" aria-hidden="true"></i>-->
 <!--                    </a>-->
-                    <a href="https://youtube.com/@howtfdoes_work" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                    <a href="https://www.linkedin.com/in/aasoni/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
                     </a>
                     <a href="mailto:aasoni.dev@gmail.com" aria-label="Email">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -1150,11 +1215,11 @@
                 <div class="footer-contact">
                     <p>
                         <i class="fas fa-envelope" aria-hidden="true"></i>
-                        aasoni.dev@gmail.com
+                        <a href="mailto:aasoni.dev@gmail.com">aasoni.dev@gmail.com</a>
                     </p>
                     <p>
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        Chicago, United States
+                        Chicago, IL
                     </p>
                     <p>
                         <i class="fas fa-clock" aria-hidden="true"></i>
