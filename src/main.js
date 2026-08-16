@@ -168,6 +168,11 @@ function initializeProjectsScroller() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduceMotion.matches) return;
 
+    // Mobile: CSS stacks the cards vertically, so the scroll-linked
+    // horizontal driver (main-thread janky on iOS Safari) is skipped.
+    const mobile = window.matchMedia('(max-width: 768px)');
+    if (mobile.matches) return;
+
     const cards = Array.from(track.children);
     const count = cards.length;
     if (count === 0) return;
@@ -447,20 +452,9 @@ function initializeHeroEffects() {
         });
     }
 
-    // Trigger counter animation when hero section is visible
-    const heroSection = document.getElementById('home');
-    if (heroSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(heroSection);
-    }
+    // Update counters immediately on load (IntersectionObserver-based
+    // triggering is unreliable on mobile Safari / Firefox Android)
+    animateCounters();
 
     // Code rain effect
     createCodeRain();
@@ -979,10 +973,10 @@ document.addEventListener('error', function(e) {
 // Analytics tracking (replace with your analytics code)
 function trackEvent(type, action, category, label) {
 
-    logEvent(type, action, {
-        event_category: category,
-        event_label: label
-    });
+    // logEvent(type, action, {
+    //     event_category: category,
+    //     event_label: label
+    // });
 
     console.log(`Analytics: ${category} - ${action} - ${label}`);
 }

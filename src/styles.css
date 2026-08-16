@@ -26,6 +26,14 @@ TABLE OF CONTENTS:
 ==============================================
 */
 
+@font-face {
+    font-family: 'Satoshi';
+    src: url('media/fonts/Satoshi-Variable.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
 /* =========== 1. CSS Variables & Reset =========== */
 :root {
 
@@ -2576,12 +2584,37 @@ section {
         margin-bottom: 2rem;
     }
 
+    /* Mobile: stack project cards vertically instead of the pinned
+       horizontal scroller (which is main-thread janky on iOS Safari) */
     .projects .projects-sticky-height {
-        height: 260vh;
+        height: auto;
     }
 
     .projects .projects-sticky {
-        padding: var(--spacing-xl) 0 calc(var(--spacing-3xl) + 72px);
+        position: static;
+        height: auto;
+        overflow: visible;
+        padding: var(--spacing-xl) 0;
+    }
+
+    .projects .projects-track {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding: 0 var(--spacing-sm) !important;
+    }
+
+    .projects .project-card {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 400px;
+        flex: 1 1 400px;
+        max-width: 460px;
+    }
+
+    .projects .projects-arrow {
+        display: none;
     }
 
     .contact .contact-form-container {
@@ -2611,10 +2644,6 @@ section {
         max-width: 100%;
     }
 
-    .projects .projects-sticky-height {
-        height: 240vh;
-    }
-
     .projects .projects-sticky {
         padding: var(--spacing-lg) 0;
     }
@@ -2628,8 +2657,10 @@ section {
     }
 
     .projects .project-card {
-        -ms-flex-preferred-size: 82vw;
-        flex-basis: 82vw;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 100%;
+        flex: 1 1 100%;
+        max-width: 100%;
         -ms-grid-rows: 150px 1fr;
         grid-template-rows: 150px 1fr;
     }
