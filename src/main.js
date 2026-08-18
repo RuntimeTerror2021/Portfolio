@@ -818,6 +818,12 @@ function showNotification(message, type = 'info') {
                 animation: slideInRight 0.3s ease-out;
                 border-left: 4px solid #10b981;
             }
+            
+            .notification span, .notification i {
+                color: black;
+            }
+          
+            
             .notification-success { border-left-color: #10b981; }
             .notification-error { border-left-color: #ef4444; }
             .notification-info { border-left-color: #3b82f6; }
