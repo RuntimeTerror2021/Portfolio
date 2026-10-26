@@ -651,7 +651,7 @@ async function handleFormSubmission(e) {
     //     `Hi Aaryan,%0D%0AI am writing to ask you about ${inquiryTopic}.%0D%0AHere's my message:%0D%0A${message}
     //     %0D%0A–${fname} ${lname} [${email}]`
     //
-    // location.href = `mailto:aasoni.dev@gmail.com?subject=${subject}&body=${body}`;
+    // location.href = `mailto:me@aasoni.dev?subject=${subject}&body=${body}`;
 
     try {
         const response = await fetch("https://api.web3forms.com/submit", {
